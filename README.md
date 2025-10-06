@@ -67,7 +67,7 @@ sudo cp sync.sh /usr/local/bin/dirsync
 ┌─────────────────┐                          ┌─────────────────┐
 │    Directory A  │                          │    Directory B  │
 │                 │                          │                 │
-│  📄 file1.txt   │  ───────────────────→   │  📄 file1.txt   │
+│  📄 file1.txt   │  ───────────────────→    │  📄 file1.txt   │
 │  📄 file2.txt   │                          │  📄 file3.txt   │
 │  📄 new.txt     │                          │                 │
 │                 │  ←───────────────────    │                 │
@@ -418,10 +418,10 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 Having issues or questions?
 
-- 🐛 [Report a Bug](https://github.com/yourusername/directory-synchronizer/issues)
-- 💡 [Request a Feature](https://github.com/yourusername/directory-synchronizer/issues)
-- 📧 Email: your.email@example.com
-- 💬 Discussions: [GitHub Discussions](https://github.com/yourusername/directory-synchronizer/discussions)
+- 🐛 [Report a Bug](https://github.com/Pushkarmehra/directory-synchronizer/issues)
+- 💡 [Request a Feature](https://github.com/Pushkarmehra/directory-synchronizer/issues)
+- 📧 Email: pushkaroops@gmail.com
+- 💬 Discussions: [GitHub Discussions](https://github.com/Pushkarmehra/directory-synchronizer/discussions)
 
 ---
 
@@ -431,7 +431,7 @@ Having issues or questions?
 
 ⭐ Star this repository if you find it helpful!
 
-[![GitHub stars](https://img.shields.io/github/stars/yourusername/directory-synchronizer.svg?style=social)](https://github.com/yourusername/directory-synchronizer/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/yourusername/directory-synchronizer.svg?style=social)](https://github.com/yourusername/directory-synchronizer/network/members)
+[![GitHub stars](https://img.shields.io/github/stars/Pushkarmehra/directory-synchronizer.svg?style=social)](https://github.com/Pushkarmehra/directory-synchronizer/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/Pushkarmehra/directory-synchronizer.svg?style=social)](https://github.com/Pushkarmehra/directory-synchronizer/network/members)
 
 </div>
