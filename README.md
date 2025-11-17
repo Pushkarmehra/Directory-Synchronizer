@@ -384,6 +384,10 @@ Return to Menu
 ```
 
 ---
+## OUTPUT
+
+![Image 1](1.png)<br>
+![Image 2](2.png)
 
 ## 📋 Requirements
 
