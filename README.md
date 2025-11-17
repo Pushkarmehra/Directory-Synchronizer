@@ -1,15 +1,15 @@
-# 📁 Directory Synchronizer
+# 📁 File Sync Tool
 
 <div align="center">
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
-![Shell](https://img.shields.io/badge/shell-bash-success.svg)
-![Platform](https://img.shields.io/badge/platform-linux-orange.svg)
+![Shell](https://img.shields.io/badge/shell-sh-success.svg)
+![Platform](https://img.shields.io/badge/platform-linux%20%7C%20unix-orange.svg)
 
-**A lightweight shell script to keep your directories perfectly synchronized**
+**A lightweight, interactive shell script for simple directory synchronization**
 
-[Features](#-features) • [Installation](#-installation) • [Usage](#-usage) • [Examples](#-examples) • [Contributing](#-contributing)
+[Features](#-features) • [Installation](#-installation) • [Usage](#-usage) • [Examples](#-examples) • [Safety](#-safety)
 
 </div>
 
@@ -17,14 +17,13 @@
 
 ## 🌟 Features
 
-- **🔄 Bidirectional Sync** - Keep two directories perfectly in sync
-- **⚡ Lightning Fast** - Native Linux shell performance
-- **📊 Detailed Logging** - Track every change with comprehensive logs
-- **🛡️ Safe Operations** - Built-in safeguards to prevent data loss
-- **🚀 Zero Dependencies** - Pure bash, works out of the box
-- **📝 Dry Run Mode** - Preview changes before applying them
-- **🎯 Selective Sync** - Filter files by extension or pattern
-- **💾 Lightweight** - Minimal resource usage
+- **🎯 Interactive Menu** - Easy-to-use text-based interface
+- **⚡ Lightweight** - Pure POSIX shell, works everywhere
+- **🔄 Multiple Sync Modes** - Copy, clean sync, or mirror operations
+- **🛡️ Confirmation Prompts** - Safety confirmations before destructive operations
+- **📂 Flexible Path Management** - Set and view source/destination paths
+- **🚀 Zero Dependencies** - Works with basic Unix tools
+- **💾 Minimal Footprint** - Ultra-lightweight script
 
 ---
 
@@ -33,30 +32,26 @@
 ### Installation
 
 ```bash
-# Clone the repository
-git clone https://github.com/yourusername/directory-synchronizer.git
+# Download or create the script
+wget https://example.com/filesync.sh
+# OR
+curl -O https://example.com/filesync.sh
 
-# Navigate to the project directory
-cd directory-synchronizer
+# Make it executable
+chmod +x filesync.sh
 
-# Make the script executable
-chmod +x sync.sh
-
-# Optional: Add to PATH
-sudo cp sync.sh /usr/local/bin/dirsync
+# Optional: Move to PATH for system-wide access
+sudo mv filesync.sh /usr/local/bin/filesync
 ```
 
 ### Basic Usage
 
 ```bash
-# Synchronize two directories
-./sync.sh /path/to/dirA /path/to/dirB
+# Run the script
+./filesync.sh
 
-# Dry run to preview changes
-./sync.sh /path/to/dirA /path/to/dirB --dry-run
-
-# Sync with detailed output
-./sync.sh /path/to/dirA /path/to/dirB --verbose
+# Or if installed to PATH
+filesync
 ```
 
 ---
@@ -64,374 +59,534 @@ sudo cp sync.sh /usr/local/bin/dirsync
 ## 💡 How It Works
 
 ```
-┌─────────────────┐                          ┌─────────────────┐
-│    Directory A  │                          │    Directory B  │
-│                 │                          │                 │
-│  📄 file1.txt   │  ───────────────────→    │  📄 file1.txt   │
-│  📄 file2.txt   │                          │  📄 file3.txt   │
-│  📄 new.txt     │                          │                 │
-│                 │  ←───────────────────    │                 │
-└─────────────────┘                          └─────────────────┘
-       ↓                                              ↓
-       └──────────────── SYNCHRONIZED ────────────────┘
+┌─────────────────────────────────────────────┐
+│          FILE SYNC MENU                     │
+│                                             │
+│  1. Set source      → Define source dir     │
+│  2. Set destination → Define target dir     │
+│  3. View paths      → Check current paths   │
+│  4. Copy files      → Basic copy operation  │
+│  5. Clean sync      → Clear then copy       │
+│  6. Mirror sync     → Complete mirror       │
+│  7. Exit            → Quit program          │
+└─────────────────────────────────────────────┘
 ```
 
-### Process Flow
+### Sync Modes Explained
 
-1. **🔍 Scan**: Analyzes both directories and their contents
-2. **🔎 Compare**: Identifies differences using timestamps and checksums
-3. **📋 Plan**: Creates list of files to copy/update
-4. **✅ Execute**: Performs synchronization operations
-5. **✔️ Verify**: Confirms all operations completed successfully
+| Mode | Description | Use Case |
+|------|-------------|----------|
+| **Copy Files** | Copies files from source to destination, preserves existing files | Incremental backup |
+| **Clean Sync** | Deletes destination contents, then copies source files | Fresh sync |
+| **Mirror Sync** | Removes entire destination directory and recreates it | Exact replica |
 
 ---
 
 ## 📖 Detailed Usage
 
-### Command Line Syntax
+### Starting the Program
 
 ```bash
-./sync.sh <source_dir> <target_dir> [options]
+./filesync.sh
 ```
 
-### Available Options
+You'll see the interactive menu:
 
-| Option | Short | Description |
-|--------|-------|-------------|
-| `--dry-run` | `-d` | Preview changes without modifying files |
-| `--verbose` | `-v` | Show detailed operation logs |
-| `--exclude PATTERN` | `-e` | Exclude files matching pattern |
-| `--include PATTERN` | `-i` | Only sync files matching pattern |
-| `--bidirectional` | `-b` | Sync in both directions |
-| `--backup` | `-B` | Create backup before syncing |
-| `--checksum` | `-c` | Use MD5 checksums for comparison |
-| `--delete` | `-D` | Delete files in target not in source |
-| `--quiet` | `-q` | Suppress all output except errors |
-| `--help` | `-h` | Display help message |
+```
+=== File Sync ===
+1. Set source
+2. Set destination
+3. View paths
+4. Copy files
+5. Clean sync
+6. Mirror sync
+7. Exit
+Choice [1-7]:
+```
+
+### Step-by-Step Workflow
+
+#### Step 1: Set Source Directory
+
+```
+Choice [1-7]: 1
+Source path: /home/user/Documents
+Set: /home/user/Documents
+```
+
+#### Step 2: Set Destination Directory
+
+```
+Choice [1-7]: 2
+Dest path: /home/user/Backup
+Set: /home/user/Backup
+```
+
+#### Step 3: View Configured Paths
+
+```
+Choice [1-7]: 3
+
+Source: /home/user/Documents
+Dest: /home/user/Backup
+```
+
+#### Step 4: Choose Sync Operation
+
+Select option 4, 5, or 6 based on your needs.
 
 ---
 
-## 🎯 Examples
+## 🎯 Menu Options Explained
 
-### Example 1: Basic One-Way Sync
+### 1. Set Source
 
-```bash
-./sync.sh ~/Documents/ProjectA ~/Backup/ProjectA
-```
-
-**Before:**
-```
-Documents/ProjectA/          Backup/ProjectA/
-├── file1.txt (modified)     ├── file1.txt (old)
-├── file2.txt                └── file3.txt
-└── new_file.txt
-```
-
-**Output:**
-```
-[INFO] Starting synchronization...
-[COPY] file2.txt → ~/Backup/ProjectA/
-[UPDATE] file1.txt → ~/Backup/ProjectA/
-[COPY] new_file.txt → ~/Backup/ProjectA/
-[SUCCESS] 3 files synchronized
-```
-
-**After:**
-```
-Documents/ProjectA/          Backup/ProjectA/
-├── file1.txt               ├── file1.txt ✓
-├── file2.txt               ├── file2.txt ✓
-└── new_file.txt            ├── file3.txt
-                            └── new_file.txt ✓
-```
-
-### Example 2: Bidirectional Sync
+Sets the source directory from which files will be copied.
 
 ```bash
-./sync.sh ~/DirA ~/DirB --bidirectional
+Source path: /path/to/source
+Set: /path/to/source
 ```
 
-Both directories will have identical contents after synchronization.
+**Note**: The source directory must exist before syncing.
 
-### Example 3: Dry Run with Verbose Output
+### 2. Set Destination
+
+Sets the destination directory where files will be copied to.
 
 ```bash
-./sync.sh ~/source ~/target --dry-run --verbose
+Dest path: /path/to/destination
+Set: /path/to/destination
 ```
 
-**Output:**
+**Note**: Destination will be created automatically if it doesn't exist.
+
+### 3. View Paths
+
+Displays currently configured paths.
+
 ```
-[DRY-RUN] Scanning directories...
-[WOULD COPY] document.pdf (2.4 MB)
-[WOULD UPDATE] report.txt (newer in source)
-[WOULD SKIP] temp.log (excluded by pattern)
-[DRY-RUN] Summary: 2 files would be copied, 1 updated, 1 skipped
+Source: /home/user/Projects
+Dest: /backup/Projects
 ```
 
-### Example 4: Filtered Sync (Images Only)
+If paths aren't set:
+```
+Source: [NOT SET]
+Dest: [NOT SET]
+```
+
+### 4. Copy Files
+
+Copies all files from source to destination, preserving existing destination files.
 
 ```bash
-./sync.sh ~/Photos ~/PhotoBackup --include "*.jpg,*.png,*.gif"
+Copy? (y/n): y
+Done!
 ```
 
-Only image files will be synchronized.
+**What happens:**
+- Destination directory is created if needed
+- Files are copied recursively
+- Permissions and timestamps are preserved (`cp -rp`)
+- Existing files in destination remain unless overwritten
 
-### Example 5: Sync with Checksums
+### 5. Clean Sync
+
+Deletes all contents from destination, then performs a fresh copy.
 
 ```bash
-./sync.sh ~/Important ~/Backup --checksum --backup
+DELETE dest first? (y/n): y
+Done!
 ```
 
-Uses MD5 checksums for accurate comparison and creates backups before overwriting.
+**What happens:**
+- All files/folders inside destination are removed (`rm -rf "$D"/*`)
+- Destination directory structure is recreated
+- Fresh copy of all source files
 
----
+**⚠️ Warning**: This removes all existing files from destination directory.
 
-## 🔧 Configuration
+### 6. Mirror Sync
 
-### Using a Config File
-
-Create `.syncrc` in your home directory or project root:
+Creates an exact mirror by removing the entire destination directory and recreating it.
 
 ```bash
-# Default synchronization mode
-SYNC_MODE="bidirectional"
-
-# Automatically create backups
-AUTO_BACKUP=true
-
-# Log level (ERROR, WARN, INFO, DEBUG)
-LOG_LEVEL="INFO"
-
-# Excluded patterns (comma-separated)
-EXCLUDE_PATTERNS="*.tmp,*.cache,.DS_Store,*.swp,*~"
-
-# Maximum file size to sync (in MB)
-MAX_FILE_SIZE=100
-
-# Use checksums for comparison
-USE_CHECKSUM=false
+Mirror (delete destination and copy again)? (y/n): y
+Done!
 ```
 
-### Environment Variables
+**What happens:**
+- Entire destination directory is removed (`rm -rf "$D"`)
+- Destination directory is recreated
+- Complete copy of source is made
+
+**⚠️ Warning**: This completely removes the destination directory.
+
+### 7. Exit
+
+Exits the program gracefully.
 
 ```bash
-export SYNC_BACKUP_DIR="$HOME/.sync_backups"
-export SYNC_LOG_FILE="/var/log/sync.log"
-export SYNC_VERBOSE=1
-```
-
----
-
-## 📊 Advanced Features
-
-### Smart File Comparison
-
-The script uses multiple criteria to determine which files need updating:
-
-```bash
-# Compare by modification time
-if [ file1 -nt file2 ]; then
-    # file1 is newer
-fi
-
-# Compare by file size
-size1=$(stat -c%s file1)
-size2=$(stat -c%s file2)
-
-# Compare by MD5 checksum (optional)
-md5sum file1 file2 | awk '{print $1}'
-```
-
-### Conflict Resolution Strategies
-
-When both files have been modified since last sync:
-
-1. **Prompt Mode**: Ask user which version to keep
-2. **Newer Wins**: Keep the file with the latest timestamp
-3. **Backup Both**: Save both versions with timestamps
-4. **Skip**: Leave both files unchanged
-
-### Logging System
-
-```bash
-# Logs are written to:
-~/.sync_logs/sync_YYYYMMDD_HHMMSS.log
-
-# View recent logs
-tail -f ~/.sync_logs/sync_*.log
-
-# Search logs
-grep "ERROR" ~/.sync_logs/*.log
+Bye!
 ```
 
 ---
 
-## 🛠️ Script Structure
+## 🎨 Examples
 
+### Example 1: Basic Backup
+
+**Scenario**: Backup your documents folder
+
+```bash
+$ ./filesync.sh
+
+=== File Sync ===
+Choice [1-7]: 1
+Source path: /home/user/Documents
+Set: /home/user/Documents
+
+Choice [1-7]: 2
+Dest path: /home/user/Backup/Documents
+Set: /home/user/Backup/Documents
+
+Choice [1-7]: 4
+Copy? (y/n): y
+Done!
 ```
-directory-synchronizer/
-├── sync.sh              # Main synchronization script
-├── lib/
-│   ├── compare.sh      # File comparison functions
-│   ├── copy.sh         # File copy operations
-│   ├── logging.sh      # Logging utilities
-│   └── utils.sh        # Helper functions
-├── config/
-│   └── .syncrc         # Default configuration
-├── tests/
-│   ├── test_basic.sh   # Basic functionality tests
-│   └── test_edge.sh    # Edge case tests
-├── README.md           # This file
-└── LICENSE             # MIT License
+
+**Result**: Documents copied to backup location, existing backups preserved.
+
+### Example 2: Fresh Project Sync
+
+**Scenario**: Create a clean copy of a project
+
+```bash
+Choice [1-7]: 1
+Source path: /home/dev/project-alpha
+Set: /home/dev/project-alpha
+
+Choice [1-7]: 2
+Dest path: /mnt/backup/project-alpha
+Set: /mnt/backup/project-alpha
+
+Choice [1-7]: 5
+DELETE dest first? (y/n): y
+Done!
 ```
+
+**Result**: Old backup deleted, fresh copy created.
+
+### Example 3: USB Drive Mirror
+
+**Scenario**: Create exact mirror on USB drive
+
+```bash
+Choice [1-7]: 1
+Source path: /home/user/Photos
+Set: /home/user/Photos
+
+Choice [1-7]: 2
+Dest path: /media/usb/Photos
+Set: /media/usb/Photos
+
+Choice [1-7]: 6
+Mirror (delete destination and copy again)? (y/n): y
+Done!
+```
+
+**Result**: USB drive contains exact mirror of Photos folder.
 
 ---
 
-## 🧪 Testing
+## 🛡️ Safety Features
 
-### Run All Tests
+### Built-in Validations
+
+1. **Path Validation**: Script checks if paths are set before operations
+2. **Source Existence Check**: Verifies source directory exists
+3. **Confirmation Prompts**: Asks for confirmation before destructive operations
+4. **Clear Error Messages**: Provides helpful feedback
+
+### Error Handling
 
 ```bash
-# Make test scripts executable
-chmod +x tests/*.sh
+# If paths not set
+Error: Set both paths!
 
-# Run test suite
-./tests/run_all_tests.sh
+# If source doesn't exist
+Error: Source not found!
+
+# If user cancels
+Copy cancelled.
+Clean sync cancelled.
+Mirror cancelled.
 ```
 
-### Manual Testing
+### Safety Tips
+
+✅ **DO:**
+- Always verify paths with option 3 before syncing
+- Test with non-critical data first
+- Keep important backups elsewhere
+- Type 'n' if unsure during confirmations
+
+❌ **DON'T:**
+- Set same directory as source and destination
+- Sync system directories without understanding consequences
+- Skip reading confirmation prompts
+- Use on critical data without testing first
+
+---
+
+## 🔧 Technical Details
+
+### Command Line Operations
+
+The script uses these standard Unix commands:
 
 ```bash
-# Create test directories
-mkdir -p /tmp/test_{source,target}
+# Copy with preservation
+cp -rp "$SOURCE"/* "$DEST"/
+# -r: recursive
+# -p: preserve permissions, ownership, timestamps
 
-# Add test files
-echo "test content" > /tmp/test_source/file1.txt
+# Remove files
+rm -rf "$DIRECTORY"
+# -r: recursive
+# -f: force (no prompts)
 
-# Run sync
-./sync.sh /tmp/test_source /tmp/test_target --verbose
+# Create directory
+mkdir -p "$DIRECTORY"
+# -p: create parents if needed, no error if exists
+```
 
-# Verify results
-diff -r /tmp/test_source /tmp/test_target
+### Script Flow
+
+```
+START
+  ↓
+Display Menu
+  ↓
+Read User Choice
+  ↓
+┌─────────────────────────────────┐
+│ 1-2: Set Paths                  │
+│ 3: Display Current Paths        │
+│ 4-6: Validate → Confirm → Sync │
+│ 7: Exit                         │
+└─────────────────────────────────┘
+  ↓
+Return to Menu
+  ↓
+(Loop Until Exit)
 ```
 
 ---
 
 ## 📋 Requirements
 
-- **OS**: Linux (tested on Ubuntu, Debian, CentOS, Arch)
-- **Shell**: Bash 4.0 or higher
-- **Tools**: Standard GNU coreutils (`cp`, `find`, `stat`, `md5sum`)
+### System Requirements
 
-Check your bash version:
+- **OS**: Linux, Unix, macOS, or any POSIX-compliant system
+- **Shell**: Any POSIX shell (`sh`, `bash`, `dash`, `ash`, etc.)
+- **Tools**: Standard Unix utilities (`cp`, `rm`, `mkdir`, `printf`)
+
+### Checking Compatibility
+
 ```bash
-bash --version
+# Check shell
+echo $SHELL
+
+# Check if script runs
+sh -n filesync.sh
+
+# Test in current directory
+./filesync.sh
 ```
 
 ---
 
 ## 🐛 Troubleshooting
 
-### Permission Denied
+### Common Issues
 
+#### Permission Denied
+
+**Problem**: Cannot execute script
 ```bash
-# If you get permission errors
-chmod +x sync.sh
-
-# For system-wide installation
-sudo ./sync.sh /source /target
+bash: ./filesync.sh: Permission denied
 ```
 
-### Script Not Found
-
+**Solution**:
 ```bash
-# Add to PATH temporarily
-export PATH=$PATH:$(pwd)
-
-# Or use full path
-/full/path/to/sync.sh /source /target
+chmod +x filesync.sh
 ```
 
-### Large Directory Performance
+#### Source Not Found
+
+**Problem**: "Error: Source not found!"
+
+**Solution**:
+- Check source path spelling
+- Ensure source directory exists
+- Use absolute paths for clarity
+
+#### Insufficient Permissions
+
+**Problem**: Cannot write to destination
+
+**Solution**:
+```bash
+# Run with sudo if needed (be careful!)
+sudo ./filesync.sh
+
+# Or change destination to user-writable location
+```
+
+#### Script Freezes
+
+**Problem**: Script appears stuck
+
+**Solution**:
+- Press Ctrl+C to cancel
+- Check if large file transfer in progress
+- Verify disk space with `df -h`
+
+---
+
+## ⚙️ Advanced Usage
+
+### Running from Anywhere
+
+Add script location to PATH:
 
 ```bash
-# For very large directories, use parallel processing
-./sync.sh /source /target --parallel 4
+# Add to ~/.bashrc or ~/.profile
+export PATH="$PATH:/path/to/script/directory"
+
+# Or create alias
+alias filesync='/path/to/filesync.sh'
 ```
+
+### Automating Sync (Scripted Usage)
+
+For automated backups, modify script or use expect/here-docs:
+
+```bash
+#!/bin/bash
+# Automated sync example
+{
+    echo "1"              # Set source
+    echo "/home/user/data"
+    echo "2"              # Set destination
+    echo "/backup/data"
+    echo "4"              # Copy files
+    echo "y"              # Confirm
+    echo "7"              # Exit
+} | ./filesync.sh
+```
+
+---
+
+## 📊 Comparison with Other Tools
+
+| Feature | File Sync | rsync | cp command |
+|---------|-----------|-------|------------|
+| Interactive | ✅ | ❌ | ❌ |
+| User-friendly | ✅ | ❌ | ⚠️ |
+| Incremental sync | ❌ | ✅ | ❌ |
+| Network sync | ❌ | ✅ | ❌ |
+| Progress display | ❌ | ✅ | ❌ |
+| Confirmation prompts | ✅ | ❌ | ❌ |
+| Learning curve | Low | High | Low |
+| Best for | Simple local backups | Complex sync tasks | Quick copies |
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+Contributions welcome! Here are some ideas:
 
-### Development Setup
+### Potential Enhancements
+
+- [ ] Progress indicators for large transfers
+- [ ] Exclude patterns (ignore certain files)
+- [ ] Incremental sync (only changed files)
+- [ ] Backup before destructive operations
+- [ ] Logging to file
+- [ ] Dry-run mode
+- [ ] Timestamp-based sync
+
+### How to Contribute
 
 ```bash
-# Fork and clone
-git clone https://github.com/yourusername/directory-synchronizer.git
-cd directory-synchronizer
+# Fork and modify
+git clone https://github.com/yourusername/filesync.git
+cd filesync
 
-# Create feature branch
-git checkout -b feature/awesome-feature
+# Make changes
+vim filesync.sh
 
-# Make changes and test
-./tests/run_all_tests.sh
+# Test thoroughly
+./filesync.sh
 
-# Commit and push
-git commit -m "Add awesome feature"
-git push origin feature/awesome-feature
+# Submit pull request
 ```
-
-### Code Style
-
-- Use 2 spaces for indentation
-- Follow [shellcheck](https://www.shellcheck.net/) recommendations
-- Add comments for complex logic
-- Keep functions under 50 lines
 
 ---
 
 ## 📝 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is released under the MIT License.
+
+```
+MIT License
+
+Copyright (c) 2024
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files...
+```
 
 ---
 
 ## 🙏 Acknowledgments
 
-- Inspired by `rsync` and `unison`
-- Built with native Linux utilities
-- Thanks to the open-source community!
+- Built with standard POSIX shell commands
+- Inspired by rsync and unison tools
+- Thanks to the Unix/Linux community
 
 ---
 
 ## 📚 Additional Resources
 
-- [Bash Scripting Guide](https://www.gnu.org/software/bash/manual/)
-- [rsync Documentation](https://rsync.samba.org/)
-- [Linux File System Hierarchy](https://www.pathname.com/fhs/)
+- [POSIX Shell Guide](https://pubs.opengroup.org/onlinepubs/9699919799/)
+- [Bash Scripting Tutorial](https://www.gnu.org/software/bash/manual/)
+- [Unix File Operations](https://www.man7.org/linux/man-pages/)
 
 ---
 
 ## 📬 Support
 
-Having issues or questions?
+Need help or found a bug?
 
-- 🐛 [Report a Bug](https://github.com/Pushkarmehra/directory-synchronizer/issues)
-- 💡 [Request a Feature](https://github.com/Pushkarmehra/directory-synchronizer/issues)
+- 🐛 [Report Issues](https://github.com/yourusername/filesync/issues)
+- 💡 [Request Features](https://github.com/yourusername/filesync/issues)
 - 📧 Email: pushkaroops@gmail.com
-- 💬 Discussions: [GitHub Discussions](https://github.com/Pushkarmehra/directory-synchronizer/discussions)
+- 💬 [Discussions](https://github.com/yourusername/filesync/discussions)
 
 ---
 
 <div align="center">
 
-**⚡ Built with Bash | Made with ❤️ for Linux**
+**⚡ Simple, Safe, Effective**
 
-⭐ Star this repository if you find it helpful!
+Made with ❤️ for the Unix community
 
-[![GitHub stars](https://img.shields.io/github/stars/Pushkarmehra/directory-synchronizer.svg?style=social)](https://github.com/Pushkarmehra/directory-synchronizer/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/Pushkarmehra/directory-synchronizer.svg?style=social)](https://github.com/Pushkarmehra/directory-synchronizer/network/members)
+⭐ Star this project if you find it useful!
+
+[![GitHub](https://img.shields.io/badge/GitHub-filesync-blue?style=flat&logo=github)](https://github.com/yourusername/filesync)
 
 </div>
